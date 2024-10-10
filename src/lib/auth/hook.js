@@ -121,7 +121,6 @@ export const handleKYCverification1 = (async(data, auth)=>{
 })
 
 export const handleChangeUsername = (async(data, auth)=>{
-    loading.set(true)
     let response = ""
     await axios.post(`${serverUrl()}/api/profile/username`,{
         username: data
@@ -137,7 +136,6 @@ export const handleChangeUsername = (async(data, auth)=>{
     })
     .catch((err)=> {
         handleResposeMessages("error",err.response?.data)
-        loading.set(false)
     })
     return response
 })

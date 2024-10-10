@@ -13,7 +13,6 @@
     { img: "https://res.cloudinary.com/dxwhz3r81/image/upload/v1720398516/avatar1_l6garj.png", active: false},
     { img: "https://res.cloudinary.com/dxwhz3r81/image/upload/v1720398515/avatar2_ztgal3.png", active: true},
     { img: "https://res.cloudinary.com/dxwhz3r81/image/upload/v1720390128/avatar11_fbdw02.png", active: false},
-    { img: "https://res.cloudinary.com/dxwhz3r81/image/upload/v1720390124/avatar33_gnrkq8.png", active: false},
     { img: "https://res.cloudinary.com/dxwhz3r81/image/upload/v1720389924/avatar66_daptmu.png", active: false},
     { img: "https://res.cloudinary.com/dxwhz3r81/image/upload/v1720389880/avatar88_enyz9d.png", active: false},
 ]

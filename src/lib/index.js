@@ -52,7 +52,6 @@ export const handleProfile = (async(auth)=>{
     })
     .catch((err)=>{
         handleResposeMessages("error", err.response?.data)
-        handleIsLogout()
     })
 })
 

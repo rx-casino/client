@@ -1,6 +1,5 @@
 <script>
     import { useSignupHook } from "../hook"
-    import { loading } from "$lib/store/activities";
     import { url } from "$lib/store/routes";
     import { device } from "$lib/store/profile";
     import { goto } from "$app/navigation";
@@ -10,6 +9,7 @@
     let username = ""
     let email = ""
     let password = ""
+    $: loading = false
     const isContainsSymbol = /^(?=.*[~`!@#$%^&*()--+={}\[\]|\\:;"'<>,.?/_₹]).*$/;
     $: _8to30Characters = password.length >= 8 && password.length <= 30 ? true : false
     $: passLowercase = password.search(/[a-z]/)  < 0 ? false : true
@@ -19,14 +19,16 @@
     $: specialChar = isContainsSymbol.test(password) 
     $: devic = { ...$device, Login_time: new Date(), type :"Email Registration"}
     
-    $: track = !username || !email || !password || $loading || !_8to30Characters || !letter || !specialChar 
+    $: track = !username || !email || !password || loading || !_8to30Characters || !letter || !specialChar 
 
     const handleSubmit = (async()=> {
+        loading = true
         if(!track){
            let response = await useSignupHook({username, email, password, referral, device:devic})
            if(response){
                 goto($url)
            }
+           loading = false
         }
     })
     let showPassword = false;
@@ -100,12 +102,13 @@
              Contain at least one sign
         </div>
     </div>
+    <!-- svelte-ignore a11y-invalid-attribute -->
     <div class="css-1nsxilh">This site is protected by reCAPTCHA and the Google <a href="#" target="_blank" rel="noreferrer">Privacy Policy</a>
             and 
             <a href="#" target="_blank" rel="noreferrer">Terms of Service</a> 
             apply.
     </div>
-    <button disabled={track} on:click={handleSubmit} class="css-u44gss button" type="submit"> {$loading ? "Loading..." : "Start playing"}</button>
+    <button disabled={track} on:click={handleSubmit} class="css-u44gss button" type="submit"> {loading ? "Loading..." : "Start playing"}</button>
 
 
         <Google text={"Sign up with Google"} />

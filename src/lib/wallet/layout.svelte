@@ -24,20 +24,20 @@
      coin_image:"https://assets.coingecko.com/coins/images/279/standard/ethereum.png?1696501628", 
      coin_name: "ETH", 
      disabled: true
-
     },
     {
-     is_active: true,   
+     is_active: false,   
      fullname: "Tron",
      coin_image:"https://assets.coingecko.com/coins/images/1094/standard/tron-logo.png?1696502193", 
      coin_name: "TRX", 
      disabled: true
     },
     {
-     is_active: false,   
+     is_active: true,   
      fullname: "Solana",
      coin_image:"https://s2.coinmarketcap.com/static/img/coins/64x64/16116.png", 
-     coin_name: "SOL"
+     coin_name: "SOL",
+     disabled: false
     },
      {
      is_active: false,   
@@ -58,7 +58,7 @@
 
 function handleClickOutside(event) {
   if (!event.target.closest('.css-15hip2x')) {
-    goto($url)
+    // goto($url)
   }
 }
 
@@ -69,8 +69,8 @@ $: referral = tab[2]
 
 
 <div class="css-1yogdko" >
-     <button class="css-17zcsfw" on:click={handleClickOutside}>
-         <div class="css-15hip2x" type="button" >
+     <div class="css-17zcsfw" >
+         <div class="css-15hip2x" >
              <div class="css-1nc5kzu">
                  <button on:click={()=> goto($url)} class="css-1ou4ub2">
                      <svg width="20px" height="20px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" size="20" class="css-1cvv4jt">
@@ -102,7 +102,7 @@ $: referral = tab[2]
                      </div>
                  </div>
                  {#if tab[1] === "deposit"}
-                    <Deposit wallet={wallet}/>
+                    <Deposit wallet={wallet} currency={tab[2]}/>
                  {/if}
                  {#if tab[1] === "withdraw"}
                     <Withdraw wallet={wallet} currency={tab[2]}/>
@@ -112,7 +112,7 @@ $: referral = tab[2]
                 {/if}
              </div>
             </div>
-     </button>
+    </div>
 </div>
 
 

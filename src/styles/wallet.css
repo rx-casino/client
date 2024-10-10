@@ -341,6 +341,7 @@
     border-radius: 8px;
     background: rgba(203, 215, 255, 0.03);
     padding: 24px;
+    text-align: -webkit-auto;
 }
 .css-191t7fp {
     display: flex;

@@ -1,8 +1,6 @@
 <script>
     export let activeCoin;
-    const logo = new URL('../../../lib/images/Cyclix Games Casino - Coin Logo 3D.png', import.meta.url).href
     import { goto } from "$app/navigation"
-    import { url } from "$lib/store/routes";
 </script>
 
 <h1 class="css-mpks89">
@@ -15,7 +13,7 @@
         </svg>
     </button>
     <img src="{activeCoin?.coin_image}" alt="" size="32" class="css-bzek24">
-    Withdraw Bitcoin
+    Withdraw {activeCoin?.fullname}
     <button on:click={()=> goto(`/account/withdrawals?tab=${(activeCoin.coin_name).toLowerCase()}`)} class="css-1w9eatj">View Transactions</button>
 </h1>
 
@@ -34,7 +32,7 @@
         <div style="height: 24px;"></div>
         <label for="rb-withdraw-amount" class="css-1vec8iw">Withdrawal amount<span class="css-1vr6qde"> *</span></label>
         <div class="css-191t7fp">
-            <div style="width: 100%;">
+            <!-- <div style="width: 100%;">
                 <div>
                     <div class="css-1f51ttt">
                         <img src="{logo}" size="20" alt="" class="css-1vhuwci" style="margin-right: 10px; margin-bottom: -2px;">
@@ -42,19 +40,19 @@
                         <input type="text" name="amountUSD" id="rb-withdraw-amount" value="">
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="css-kaz972">=</div>
             <div style="width: 100%;"><div>
                 <div class="css-1f51ttt">
                     <img src="{activeCoin?.coin_image}" alt
                      size="20" class="css-1lgqybz" style="margin-right: 10px;">
-                     <input type="text" name="amountCrypto" value="">
+                     <input type="text" placeholder="withdrawal amount" name="amountCrypto" value="">
                     </div>
                 </div>
             </div>
             <button class="css-wrt0jz" type="submit">Request withdrawal</button>
         </div>
-        <div class="css-g5wbxx">Network Fee: $2.05</div>
+        <div class="css-g5wbxx">Network Fee: $0.35</div>
     </form>
     <div class="css-1x7hz3d" style="font-size: 12px; margin: 16px 0px 0px;">*You will receive the specified {activeCoin?.fullname} amount to your withdrawal address<br>*The value subtracted from your balance may vary between now and the time we process your withdrawal</div>
 </div>

@@ -10,7 +10,7 @@
    import { handleChangeUsername, handleChangeProfilePrivacy, handleGoogleLink } from "$lib/auth/hook"
    const badge = new URL('../../../lib/images/badges/bronze1.png', import.meta.url).href
    import { handleAuthToken } from "$lib/store/routes";
-    import Loader from "../../../lib/loader.svelte";
+   import Loader from "../../../lib/loader.svelte";
 
 let Images = [
     { img: "https://res.cloudinary.com/dxwhz3r81/image/upload/v1720390192/avatar55_rtiys4.png", active: false},
@@ -18,7 +18,6 @@ let Images = [
     { img: "https://res.cloudinary.com/dxwhz3r81/image/upload/v1720398516/avatar1_l6garj.png", active: false},
     { img: "https://res.cloudinary.com/dxwhz3r81/image/upload/v1720398515/avatar2_ztgal3.png", active: true},
     { img: "https://res.cloudinary.com/dxwhz3r81/image/upload/v1720390128/avatar11_fbdw02.png", active: false},
-    { img: "https://res.cloudinary.com/dxwhz3r81/image/upload/v1720390124/avatar33_gnrkq8.png", active: false},
     { img: "https://res.cloudinary.com/dxwhz3r81/image/upload/v1720389924/avatar66_daptmu.png", active: false},
     { img: "https://res.cloudinary.com/dxwhz3r81/image/upload/v1720389880/avatar88_enyz9d.png", active: false},
 ]
@@ -30,16 +29,21 @@ let Images = [
    $: track = !username || $user.username === username || $loading
    $: profile_picture = $user?.profileImg
    
+   $: ChangeUsernameHook = false 
    const handleChangeUsernameHook = (async()=>{
-      const response = handleChangeUsername(username, $handleAuthToken)
-      if(response){
-          username = ""
+      if(username){
+         ChangeUsernameHook = true
+         await handleChangeUsername(username, $handleAuthToken)
+         ChangeUsernameHook = false
+         username = ""
       }
    })
-
+   $: ishandlePrivacy = false
    const handlePrivacy = (async()=>{
+      ishandlePrivacy = true
       profileHidden =! profileHidden
        await handleChangeProfilePrivacy(profileHidden, $handleAuthToken)
+       ishandlePrivacy = false
    })
    
    const handleLinkEmail = (async()=>{
@@ -244,7 +248,7 @@ const previewImage = (event) => {
          <div>
             <div class="css-1f51ttt">
                <input type="text" name="name" placeholder="{$user?.username}" id="rollbit-field-11108" bind:value={username}>
-               <button class="css-vmbe4r button" disabled={track} type="submit" style="margin-right: 4px;">{ $loading ? "Loading..." : "Change"}</button>
+               <button class="css-vmbe4r button" disabled={ChangeUsernameHook} type="submit" style="margin-right: 4px;">{ChangeUsernameHook ? "Loading..." : "Change"}</button>
             </div>
          </div>
       </div>
@@ -262,7 +266,7 @@ const previewImage = (event) => {
 
 <div class="css-18bcdcq">
    <div>
-      <input type="checkbox" id="proof-checkbox-11111" disabled={$loading} class="css-11eskem" checked={profileHidden} on:change={(e)=> handlePrivacy(e)}>
+      <input type="checkbox" id="proof-checkbox-11111" disabled={ishandlePrivacy} class="css-11eskem" checked={profileHidden} on:change={(e)=> handlePrivacy(e)}>
       <label for="proof-checkbox-11111" class="css-ep1r8t">
          <div class="css-1jwtohg"></div>
          Private profile
@@ -285,7 +289,7 @@ const previewImage = (event) => {
       </div>
    {/if}
 
-   <span style="padding-left: 20px;">{$loading ? "Loading..." : ""}</span>
+   <span style="padding-left: 20px;">{ishandlePrivacy ? "Loading..." : ""}</span>
 </div>
 </div>
 
