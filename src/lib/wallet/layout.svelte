@@ -11,27 +11,6 @@
     export let tab
   
    let wallet = [
-     {
-        is_active: false,
-         fullname: "Bitcoin",
-        coin_image:"https://assets.coingecko.com/coins/images/1/standard/bitcoin.png?1696501400", 
-        coin_name: "BTC", 
-        disabled: true
-    },
-    {
-     is_active: false,   
-     fullname: "Ethereum",
-     coin_image:"https://assets.coingecko.com/coins/images/279/standard/ethereum.png?1696501628", 
-     coin_name: "ETH", 
-     disabled: true
-    },
-    {
-     is_active: false,   
-     fullname: "Tron",
-     coin_image:"https://assets.coingecko.com/coins/images/1094/standard/tron-logo.png?1696502193", 
-     coin_name: "TRX", 
-     disabled: true
-    },
     {
      is_active: true,   
      fullname: "Solana",
@@ -39,20 +18,7 @@
      coin_name: "SOL",
      disabled: false
     },
-     {
-     is_active: false,   
-     fullname: "Litecoin",
-     coin_image:"https://assets.coingecko.com/coins/images/2/standard/litecoin.png?1696501400", 
-     coin_name: "LTC",
-     disabled: true
-    },
-    {
-     is_active: false,   
-     fullname: "Tether",
-     coin_image:"https://assets.coingecko.com/coins/images/325/large/Tether.png?1668148663", 
-     coin_name: "USDT",
-     disabled: true
-    }
+
  ]
 
 
