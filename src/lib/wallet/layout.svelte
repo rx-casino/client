@@ -1,5 +1,4 @@
 <script>
-    import { browser} from '$app/environment';
     import { createEventDispatcher } from 'svelte';
     const dispatch = createEventDispatcher()
     import { goto } from "$app/navigation"
@@ -18,7 +17,6 @@
      coin_name: "SOL",
      disabled: false
     },
-
  ]
 
 
