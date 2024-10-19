@@ -2,11 +2,9 @@ import { browser } from '$app/environment'
 
 export const serverUrl = () => {
   if(browser){
-    if (location.hostname === "localhost" || location.hostname === "127.0.0.1"){
-      return "http://localhost:8000";
-    }else{
-      return "https://rx-casino.onrender.com";
-    }
+    let url = location.hostname === "localhost" || location.hostname === "127.0.0.1" 
+    ? "http://localhost:8000" : "https://rx-casino.onrender.com"
+     return url
   }
 }
 

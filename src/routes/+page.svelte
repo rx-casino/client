@@ -3,9 +3,8 @@
     import LiveLayout from "$lib/homeComponent/liveLayout.svelte";
     import NavTabs from "$lib/homeComponent/navTabs.svelte";
     import { handleListGame, slots , livGames, Buyslots} from "$lib/homeComponent/hook"
-    import { onMount } from "svelte";
     import { screen } from "$lib/store/screen";
-
+    import { goto } from "$app/navigation";
 
    let live = [1,2,3,4,5,6,7,8,9,0,9,8,7,6]
 
@@ -52,7 +51,9 @@
                         space-between="20"
                     >
                     {#each handleListGame() as game}
-                        <div class="swiper-slide swiper-slide-duplicate css-vugqe6" >
+                    <!-- svelte-ignore a11y-no-static-element-interactions -->
+                    <!-- svelte-ignore a11y-click-events-have-key-events -->
+                        <div on:click={()=> goto(`/${game.url}`)} class="swiper-slide swiper-slide-duplicate css-vugqe6" >
                             <div style="padding-top: 10px;">
                                 <div class="css-d6icxj">
                                     <img class="css-nyormw" src="{game.img}" alt="Mines">
@@ -97,7 +98,9 @@
                         space-between="20"
                     >
                     {#each slots as game}
-                        <div class="swiper-slide swiper-slide-duplicate css-vugqe6" >
+                           <!-- svelte-ignore a11y-no-static-element-interactions -->
+                    <!-- svelte-ignore a11y-click-events-have-key-events -->
+                        <div on:click={()=> goto(`/${game.url}`)} class="swiper-slide swiper-slide-duplicate css-vugqe6" >
                             <div style="padding-top: 10px;">
                                 <div class="css-d6icxj">
                                     <img class="css-nyormw" src="{game.img}" alt="Mines">
@@ -141,7 +144,9 @@
                         space-between="20"
                     >
                     {#each livGames as game}
-                        <div class="swiper-slide swiper-slide-duplicate css-vugqe6" >
+                        <!-- svelte-ignore a11y-no-static-element-interactions -->
+                         <!-- svelte-ignore a11y-click-events-have-key-events -->
+                        <div on:click={()=> goto(`/${game.url}`)} class="swiper-slide swiper-slide-duplicate css-vugqe6" >
                             <div style="padding-top: 10px;">
                                 <div class="css-d6icxj">
                                     <img class="css-nyormw" src="{game.img}" alt="Mines">
@@ -183,7 +188,9 @@
                         space-between="20"
                     >
                     {#each Buyslots as game}
-                        <div class="swiper-slide swiper-slide-duplicate css-vugqe6" >
+                        <!-- svelte-ignore a11y-no-static-element-interactions -->
+                         <!-- svelte-ignore a11y-click-events-have-key-events -->
+                        <div on:click={()=> goto(`/${game.url}`)} class="swiper-slide swiper-slide-duplicate css-vugqe6" >
                             <div style="padding-top: 10px;">
                                 <div class="css-d6icxj">
                                     <img class="css-nyormw" src="{game.img}" alt="Mines">

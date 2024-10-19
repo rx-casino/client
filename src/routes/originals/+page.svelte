@@ -3,13 +3,14 @@
    import LiveLayout from "$lib/homeComponent/liveLayout.svelte";
    import NavTabs from "$lib/homeComponent/navTabs.svelte";
    import { handleListGame} from "$lib/homeComponent/hook"
+   import { goto } from "$app/navigation";
+
 </script>
 
 <div class="css-7oel5t">
    <LiveLayout />
    <div style="height: 24px;"></div>
    <NavTabs />
-
    <div class="css-ojf8hg">
       <div class="css-1yx9de1">
          <div class="css-1y4bokc">
@@ -46,7 +47,9 @@
          <div class="css-1l01j61">
             {#each handleListGame() as game}
                <div>
-                  <div class="css-d6icxj">
+                   <!-- svelte-ignore a11y-no-static-element-interactions -->
+                    <!-- svelte-ignore a11y-click-events-have-key-events -->
+                  <div on:click={()=> goto(`/${game.url}`)} class="css-d6icxj">
                      <img class="css-nyormw" src="{game.img}" alt="Mines">
                      <div class="css-1agvln2" style="display: none; background: rgba(39, 43, 56, 0.95);">
                         <div class="css-199grsv">Challenge Pool</div>
