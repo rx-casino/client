@@ -9,7 +9,7 @@
    import { onMount } from "svelte";
    import { url, seaser } from "$lib/store/routes";
    import { device } from "$lib/store/profile";
-   import Password from "$lib/password/index.svelte";
+   // import Password from "$lib/password/index.svelte";
    import Loader from "$lib/loader.svelte";
    import RightSideBar from "$lib/right-sideBar.svelte";
    import LeftSidebar from "$lib/left-sidebar.svelte";
@@ -127,9 +127,6 @@
 <Toaster position="bottom-left" expand={true} richColors  />
 {#if $screen && $device}
    <div id="root" >
-      {#if isPassword}
-         <Password on:close={()=> isPassword = false}/>
-      {/if}
       <Navbar sideHasExpand={sideHasExpand} chat={chat} menu={menu} on:return={()=> sideHasExpand = 248} on:chat={handleChatSection} on:menu={handleMenuSection}/>
          {#if $screen < 750}
             <div style="min-height: 112px;"></div>
