@@ -56,34 +56,34 @@ const handleFubbf = (() => {
 
 const handleLostBet = (async (data) => {
     await axios.post(`${URL}/api/user/mine-game/lost-bet`, {
-            data
-        }, {
-            headers: {
-                Authorization: `Bearer ${$handleAuthToken}`
-            }
-        })
-        .then((res) => {
-            mine_history.set([...$mine_history, res.data[0]])
-        })
-        .catch((error) => {
-            console.log(error)
-        })
+        data
+    }, {
+        headers: {
+            Authorization: `Bearer ${$handleAuthToken}`
+        }
+    })
+    .then((res) => {
+        mine_history.set([...$mine_history, res.data[0]])
+    })
+    .catch((error) => {
+        console.log(error)
+    })
 })
 
 const handleUpdateWins = (async (data) => {
     await axios.post(`${URL}/api/user/mine-game/update-wins`, {
-            data
-        }, {
-            headers: {
-                Authorization: `Bearer ${$handleAuthToken}`
-            }
-        })
-        .then((res) => {
-            (res.data)
-        })
-        .catch((error) => {
-            console.log(error.response)
-        })
+        data
+    }, {
+        headers: {
+            Authorization: `Bearer ${$handleAuthToken}`
+        }
+    })
+    .then((res) => {
+        (res.data)
+    })
+    .catch((error) => {
+        console.log(error.response)
+    })
 })
 
 let multiplayerEl = 1.03
@@ -2967,7 +2967,7 @@ onMount(async () => {
     width: 100%;
     height: 100%;
     color: rgba(153, 164, 176, 0.6);
-    background-color: rgba(122, 128, 140, 0.15);
+    /* background-color: rgba(122, 128, 140, 0.15); */
     -webkit-box-align: center;
     align-items: center;
     -webkit-box-pack: center;

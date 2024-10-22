@@ -1,5 +1,5 @@
 <script>
-import AutoControllers from "./AutoControllers.svelte";
+// import AutoControllers from "./AutoControllers.svelte";
 import ManualControllers from "./ManualControllers.svelte";
 import { HandleIsAlive, HandleWinning, HandleHas_won } from "../mines/store/index";
 let is_manual = true
@@ -29,10 +29,10 @@ const hanleManualControls = ((e)=>{
     </div>
     <div class="game-control-panel" style="margin-top: 30px;">
         {#if is_manual}
-            <ManualControllers />
+            <!-- <ManualControllers /> -->
         {/if}
         {#if !is_manual}
-            <AutoControllers />
+            <!-- <AutoControllers /> -->
         {/if}
     </div>
 </div>

@@ -1,4 +1,5 @@
 import axios from "axios"
+import { toast } from "svelte-sonner"
 import { serverUrl } from "$lib/backendUrl";
 import { handleResposeMessages, loading , isLoggin} from "$lib/store/activities";
 import { user } from "$lib/store/profile";
@@ -7,7 +8,7 @@ import { handleIsLogout } from "$lib/auth/hook"
 import { browser } from '$app/environment';
 import { handleAuthToken } from "$lib/store/routes";
 import { coin_list, default_Wallet } from "$lib/store/coins";
-import { goto } from "$app/navigation"
+import { goto } from "$app/navigation";
 
 const handleAuthHeader = (()=>{
     let auth;
@@ -16,6 +17,39 @@ const handleAuthHeader = (()=>{
     })
     return auth
 })
+
+export class App_script{
+    constructor(){
+        this.serverUrl = serverUrl()
+        this.isLogin = false
+        this.secret = ""
+        this.user = {}
+        this.header = {
+            Authorization: `Bearer ${this.secret}`
+        }
+    }
+    async handleProfile(secret){
+        this.secret = secret
+        const path = "/api/profile/user"
+        await axios.get(this.serverUrl + path,{ headers: this.header})
+        .then((res)=>{
+            // let response = res.data
+            // loading.set(false)
+            // isLoggin.set(true)
+            // user.set(response?.user)
+            // let wallet = response?.wallet
+            // coin_list.set(wallet)
+            // wallet.forEach(element => {
+            //     if(element.is_active){
+            //         default_Wallet.set(element)
+            //     }
+            // });
+        })
+        .catch((err)=>{
+            toast.error(err.response?.data)
+        })
+    }
+}
 
 export const handleUserProfile = (async(id)=>{
     let respose = ""

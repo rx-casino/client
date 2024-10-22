@@ -428,7 +428,7 @@
   .empty-item {
     text-align: center;
     display: flex;
-    padding: 7px 120px 0 9px;
+    /* padding: 7px 120px 0 9px; */
     justify-content: center;
   }
 </style>

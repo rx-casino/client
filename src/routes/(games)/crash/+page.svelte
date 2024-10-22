@@ -117,7 +117,7 @@ onMount(async () => {
   .lmWKWf .game-main {
     position: relative;
     border-radius: 1.25rem;
-    background-color: rgb(23, 24, 27);
+    background-color: rgb(20, 22, 34);
   }
   :global(
       .lmWKWf.game-style0 .game-view,

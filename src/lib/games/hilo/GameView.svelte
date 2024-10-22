@@ -35,7 +35,7 @@
   $: gameWinData = {
     payout: "0.00",
     profit: "0.000000",
-    token_img: "/coin/BTC.black.png",
+    token_img: "/assets/sol.png",
   };
 
   $: {
@@ -533,7 +533,7 @@
     width: 100%;
     height: 100%;
     color: rgba(153, 164, 176, 0.6);
-    background-color: rgba(122, 128, 140, 0.15);
+    /* background-color: rgba(122, 128, 140, 0.15); */
     -webkit-box-align: center;
     align-items: center;
     -webkit-box-pack: center;

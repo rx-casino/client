@@ -1,9 +1,9 @@
 import { io } from "socket.io-client";
-import { ServerURl } from "$lib/backendUrl"
-const URL = ServerURl();
+import { serverUrl } from "$lib/backendUrl"
+const URL = serverUrl();
 const socket = io(`${URL}`);
 import { processingRequest, hilo_game, userBets, recentBets, initializing } from "../store/index";
-import { default_Wallet, btc_Wallet, wgfWallet, wgdWallet, ethWallet, } from "$lib/store/coins";
+import { default_Wallet } from "$lib/store/coins";
 
 
 export const socketEvents = ((user_id) => {
@@ -79,27 +79,28 @@ export const socketEvents = ((user_id) => {
 
     socket.on("hilo-wallet", data => {
         if (user_id === data.user_id) {
-            if (data.token === "BTC") {
-                btc_Wallet.update(v => ({
-                    ...v,
-                    balance: data.balance
-                }))
-            } else if (data.token === "WGD") {
-                wgdWallet.update(v => ({
-                    ...v,
-                    balance: data.balance
-                }))
-            } else if (data.token === "WGF") {
-                wgfWallet.update(v => ({
-                    ...v,
-                    balance: data.balance
-                }))
-            } else if (data.token === "ETH") {
-                ethWallet.update(v => ({
-                    ...v,
-                    balance: data.balance
-                }))
-            }
+            // if (data.token === "SOL") {
+            //     btc_Wallet.update(v => ({
+            //         ...v,
+            //         balance: data.balance
+            //     }))
+            // }
+            //  else if (data.token === "WGD") {
+            //     wgdWallet.update(v => ({
+            //         ...v,
+            //         balance: data.balance
+            //     }))
+            // } else if (data.token === "WGF") {
+            //     wgfWallet.update(v => ({
+            //         ...v,
+            //         balance: data.balance
+            //     }))
+            // } else if (data.token === "ETH") {
+            //     ethWallet.update(v => ({
+            //         ...v,
+            //         balance: data.balance
+            //     }))
+            // }
 
             default_Wallet.update(v => ({
                 ...v,

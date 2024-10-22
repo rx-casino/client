@@ -6,7 +6,7 @@
   import ConfirmDialog from "../ConfirmDialog.svelte";
   import { UseFetchData } from "$lib/hook/useFetchData";
   import { handleAuthToken } from "$lib/store/routes";
-  import { profileStore } from "$lib/store/profile";
+  import { user } from "$lib/store/profile";
   import useDeck from "../../hooks/deck";
   import { error_msg } from "../../store";
   import { createEventDispatcher, onMount } from "svelte";
@@ -278,7 +278,7 @@
         </div>
       </div>
     </div>
-    {#if $profileStore.user_id === gameDetails.betLog.user.user_id}
+    {#if $user.user_id === gameDetails.betLog.user.user_id}
       <div class="verify-wrap">
         <button
           disabled={loading}

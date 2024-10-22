@@ -1,23 +1,19 @@
 <script>
-import {default_Wallet} from "$lib/store/coins"
-import Icon from 'svelte-icons-pack/Icon.svelte';
-import RiSystemArrowUpSLine from "svelte-icons-pack/ri/RiSystemArrowUpSLine";
-import RiSystemArrowDownSLine from "svelte-icons-pack/ri/RiSystemArrowDownSLine";
-import RiSystemArrowRightSLine from "svelte-icons-pack/ri/RiSystemArrowRightSLine";
-import BsExclamationCircle from "svelte-icons-pack/bs/BsExclamationCircle";
+import {default_Wallet} from "$lib/store/coins";
 import { payout , minesStore, betDetails, Cashout } from "../mines/store/index";
-import { handleAuthToken } from "$lib/store/routes"
-import { handleisLoggin, profileStore } from "$lib/store/profile"
-import { error_msg } from "./store/index"
+import { handleAuthToken } from "$lib/store/routes";
+import { isLoggin} from "$lib/store/activities";
+import { user } from "$lib/store/profile";
+import { toast } from 'svelte-sonner';
 import { bet_amount,canCashout, soundHandler,mine_history,HandleSelectedMine,HandleNextTime,HandleGame_id,
     MinesEncription,HandleHas_won,HandleMineCount, HandlemineGems,HandleWinning,  HandleIsAlive} from "$lib/games/mines/store/index"
 import axios from "axios";
-import Loader from "$lib/components/loader.svelte";
-import successSound from "./audio/success-1-6297.mp3"
-import { ServerURl } from "$lib/backendUrl"
+import Loader from "$lib/loader.svelte";
+import successSound from "./audio/success-1-6297.mp3";
+import { serverUrl } from "$lib/backendUrl";
 import { onMount } from "svelte";
 
-const URL = ServerURl()
+const URL = serverUrl()
 // import {useLiveStats} from "$lib/hook/livestats"
 // const {recordGame} = useLiveStats(liveStats, "MINES_LIVE_STATS")
 
@@ -116,30 +112,28 @@ $:{
     multiplier = multiplayerEl * (25 - $HandlemineGems)
 }
 
-
-
 let uuyd = false
 let none = 1
 let is_loading = false
 const handleDpojb = (async()=>{
      // if(browser && window.navigator.onLine){
         is_loading = true
-        if($handleisLoggin){
+        if($isLoggin){
             if( $default_Wallet.coin_name !== "BTC" 
             && $default_Wallet.coin_name !== "WGF"
             && $default_Wallet.coin_name !== "ETH"  ){
-                error_msg.set("Select another coin")
+                toast.error("Select another coin")
                 is_loading = false
                 setTimeout(()=>{
-                    error_msg.set('')
+                    toast.error('')
                 },4000)
             }
         else{
             if( parseFloat($bet_amount)> parseFloat($default_Wallet.balance)){
-                error_msg.set("Insufficient balance")
+                toast.error("Insufficient balance")
                 is_loading = false
                 setTimeout(()=>{
-                    error_msg.set('')
+                    toast.error('')
                 },4000)
             }  
             else{
@@ -147,8 +141,8 @@ const handleDpojb = (async()=>{
                     mines: activeMIne.id,
                     bet_amount:  parseFloat($bet_amount),
                     bet_token_img: $default_Wallet.coin_image, 
-                    username: $profileStore.username, 
-                    profile_img: $profileStore.profile_image, 
+                    username: $user.username, 
+                    profile_img: $user.profile_image, 
                     bet_token_name: $default_Wallet.coin_name ,
                     token_balance: $default_Wallet.balance,
                     client_seed: $MinesEncription.client_seed,
@@ -290,11 +284,8 @@ const handleDpojb = (async()=>{
         }
         } 
          else{
-            error_msg.set('You are not Logged in')
+            toast.error('You are not Logged in')
             is_loading = false
-            setTimeout(()=>{
-                error_msg.set('')
-            },4000)
         }
 })
 
@@ -393,14 +384,6 @@ const handlesjen = (e) => {
 </script>
 
 
-    {#if $error_msg}
-    <div style="background-color:crimson;" class="error-message">
-        <div class="hTTvsjh"> 
-            <div>{$error_msg}</div>
-        </div>
-    </div>
- {/if}   
-
     <div class="sc-juEPzu lgTgT">
         <div class="sc-ezbkAF gcQjQT input sc-fvxzrP gOLODp sc-gsFzgR fCSgTW game-coininput">
             <div class="input-label">
@@ -408,7 +391,7 @@ const handlesjen = (e) => {
                     <div>Amount</div>
                     <div class="max-profit">
                         <button on:mouseleave={()=>Handlemax_profit_tips(2)} on:mouseenter={()=>Handlemax_profit_tips(1)} class="sc-gsDKAQ hxODWG icon" >
-                            <Icon src={BsExclamationCircle}  size="15"  color="rgb(67, 179, 9)"  title="" />
+                            <!-- <Icon src={BsExclamationCircle}  size="15"  color="rgb(67, 179, 9)"  title="" /> -->
                         </button>
                         {#if max_profit_tips}
                         <div class="tip">
@@ -432,7 +415,7 @@ const handlesjen = (e) => {
                 {:else}
                     <input type="number" bind:value={$bet_amount}>
                 {/if}
-                {#if $handleisLoggin}
+                {#if $isLoggin}
                 {#if $HandleIsAlive}
                     <img class="coin-icon" alt="" src={$betDetails.bet_token_img}>
                     {:else}
@@ -472,8 +455,8 @@ const handlesjen = (e) => {
                     </div>
                   {/if}
                     <button on:click={handleMinMax} class="sc-cAhXWc cMPLfC">
-                        <Icon src={RiSystemArrowUpSLine}  size="80"  color="rgba(153, 164, 176, 0.6)"  />
-                        <Icon src={RiSystemArrowDownSLine}  size="80"  color="rgba(153, 164, 176, 0.6)"  />
+                        <!-- <Icon src={RiSystemArrowUpSLine}  size="80"  color="rgba(153, 164, 176, 0.6)"  />
+                        <Icon src={RiSystemArrowDownSLine}  size="80"  color="rgba(153, 164, 176, 0.6)"  /> -->
                     </button>
                 </div>
             </div>
@@ -490,7 +473,7 @@ const handlesjen = (e) => {
                     {/if}
                     {#if !$HandleIsAlive}
                     <div class="arrow ">
-                        <Icon src={RiSystemArrowRightSLine}  size="20"  color="rgba(153, 164, 176, 0.6)"  />
+                        <!-- <Icon src={RiSystemArrowRightSLine}  size="20"  color="rgba(153, 164, 176, 0.6)"  /> -->
                     </div>
                     {/if}
                 </button>

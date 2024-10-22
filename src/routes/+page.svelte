@@ -53,7 +53,7 @@
                     {#each handleListGame() as game}
                     <!-- svelte-ignore a11y-no-static-element-interactions -->
                     <!-- svelte-ignore a11y-click-events-have-key-events -->
-                        <div on:click={()=> goto(`/${game.url}`)} class="swiper-slide swiper-slide-duplicate css-vugqe6" >
+                        <a href="{game.url}"  class="swiper-slide swiper-slide-duplicate css-vugqe6" >
                             <div style="padding-top: 10px;">
                                 <div class="css-d6icxj">
                                     <img class="css-nyormw" src="{game.img}" alt="Mines">
@@ -65,7 +65,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     {/each}
                 </swiper-container>
                 </div>

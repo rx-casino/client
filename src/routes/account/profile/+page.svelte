@@ -318,8 +318,11 @@ const previewImage = (event) => {
      
    </div>
 </div>
+{#if !$user.is_verified}
+   <Verification />
+{/if}
 
-<Verification />
+
 
 <style>
 .iWksniw{

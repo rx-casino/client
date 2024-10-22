@@ -22,10 +22,11 @@
    import Verification from "$lib/auth/verify/verification.svelte";
    import Wallet from "$lib/wallet/layout.svelte";
    import { fetchVistorsDevice } from "$lib/index";
-   import { handleFetchPublicChat } from "$lib/socket/index";
+   import { handleSocketConnection } from "$lib/socket/index";
    import SearchGames from "$lib/searchGames/SearchGames.svelte";
    import User from "$lib/user/layout.svelte"
    import LiveStats from "$lib/games/crash/dialogs/LiveStats.svelte";
+   import { navigating } from '$app/stores';
    export let data 
 
    $: isPassword = data?.password ? false : true
@@ -94,7 +95,8 @@
    })
 
    onMount(async()=>{
-      await handleFetchPublicChat()
+     const { handleFetchPublicChat } = await handleSocketConnection()
+     handleFetchPublicChat()
    })
 
    onMount(()=>{
@@ -122,6 +124,7 @@
 
    $: newScreen.set($screen - sideHasExpand)
 
+   
 </script>
 
 <Toaster position="bottom-left" expand={true} richColors  />

@@ -11,7 +11,10 @@ export const handleSocketConnection = (async()=>{
     socket.on("dice-gamePLayers", data => {
         dicegameplays.set(data)
     })
-    socket.on("new-message", data => {
+    socket.on("chats", data => {
+        publicChat.set(data)
+    })
+    socket.on("default-chat", data => {
         publicChat.set(data)
     })
     const handlePublicChat = (async(data)=>{
@@ -20,15 +23,8 @@ export const handleSocketConnection = (async()=>{
     const handleDicebet = (async(data)=>{
         socket.emit("dice-game", data)
     })
-    return {handlePublicChat, handleDicebet}
-})
-
-export const handleFetchPublicChat = (async()=>{
-    await axios.get(`${URL}/auth/previus-chats`)
-    .then((res) => {
-        publicChat.set(res.data);
+    const handleFetchPublicChat = (async(data)=>{
+        socket.emit("fetch-defult")
     })
-    .catch((error)=>{
-        console.log(error)
-    })
+    return {handlePublicChat, handleDicebet, handleFetchPublicChat}
 })

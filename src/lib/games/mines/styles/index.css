@@ -13,6 +13,9 @@
 .cYiOHZ {
     display: flex;
 }
+.cYiOHZ.style1 {
+    flex-direction: column;
+}
 .cYiOHZ .game-control-switch {
     display: flex;
     flex: 0 0 auto;

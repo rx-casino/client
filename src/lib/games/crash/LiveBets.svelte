@@ -377,7 +377,7 @@
     max-width: 542px;
   }
   .gnytwz {
-    background-color: rgb(30, 32, 36);
+    background-color: rgb(20, 22, 34);
     border-radius: 1.25rem;
     position: relative;
   }

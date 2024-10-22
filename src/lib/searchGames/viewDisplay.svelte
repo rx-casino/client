@@ -1,4 +1,5 @@
 <script>
+    import {goto} from "$app/navigation"
     export let tab
       import { handleListGame, slots , livGames, Buyslots} from "$lib/homeComponent/hook"
       const allGames = [...handleListGame(),...slots, ...livGames, ...Buyslots]
@@ -30,9 +31,11 @@
     </div>
     <div class="css-1l01j61">
         {#each newdisplayViewList as game}
-        <div class="css-d6icxj">
-            <img class="css-nyormw" src="{game.img}" alt="">
-        </div>
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <!-- svelte-ignore a11y-no-static-element-interactions -->
+            <div on:click={()=> goto(game.url)} class="css-d6icxj">
+                <img class="css-nyormw" src="{game.img}" alt="">
+            </div>
         {/each}
         <div>
     </div>

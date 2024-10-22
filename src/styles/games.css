@@ -132,6 +132,7 @@
     width: 100%;
     padding: 1.5rem 1.5rem 2rem;
     margin-top: 2rem;
+    background-color: rgb(20, 22, 34);
 }
 .cFxmZX .intro-title {
     min-height: 5rem;
@@ -175,7 +176,7 @@
 }
 
 .tabs-view {
-    background-color: rgb(31, 35, 48);
+    background-color: rgb(20, 22, 34);
     border-radius: 1.25rem;
     padding: 1px 0px;
 }
@@ -636,7 +637,7 @@
     width: 100%;
     height: 100%;
     color: rgba(153, 164, 176, 0.6);
-    background-color: rgb(31, 35, 48);
+    /* background-color: rgb(31, 35, 48); */
     -webkit-box-align: center;
     align-items: center;
     -webkit-box-pack: center;
@@ -1113,7 +1114,7 @@
 .lmWKWf .game-main {
     position: relative;
     border-radius: 1.25rem;
-    background-color: rgb(23, 24, 27);
+    background-color: rgb(20, 22, 34);
 }
 
 .drag-block {
@@ -1169,15 +1170,7 @@
     flex: 1 1 0%;
     height: 100%;
 }
-.eOA-dmL {
-    position: relative;
-    display: flex;
-    height: 0.875rem;
-    overflow: hidden;
-    box-sizing: content-box;
-    padding: 0px 0.8125rem;
-    cursor: pointer;
-}
+
 .fCSgTW .fix-layer > button {
     height: 100%;
     width: 2.5rem;
@@ -1195,7 +1188,7 @@
     height: 0.875rem;
     overflow: hidden;
     box-sizing: content-box;
-    padding: 0px 0.8125rem;
+    padding: 0px 0.2125rem;
     cursor: pointer;
 }
 .fCSgTW .fix-layer .slider-after {
@@ -1592,6 +1585,7 @@
     position: relative;
 }
 
+
 .cYiOHZ.style0 {
     position: absolute;
     left: 0px;
@@ -1616,9 +1610,31 @@
 .cYiOHZ {
     display: flex;
 }
+.cYiOHZ.style1 {
+    flex-direction: column;
+}
+.cYiOHZ.style1 .game-control-switch {
+    order: 2;
+    margin-top: 1.25rem;
+    position: relative;
+}
+.kMAYer.style1 .game-control-switch::before {
+    content: "";
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    height: 1px;
+    opacity: 0.3;
+    background-color: rgb(49, 52, 60);
+}
 .cYiOHZ .game-control-switch {
     display: flex;
     flex: 0 0 auto;
+}
+.cYiOHZ.style1 .game-control-switch > button.is-active {
+    border-bottom-color: var(--primary-color);
+    background-image: linear-gradient(to top, rgba(123, 197, 20, 0.3), rgba(123, 197, 20, 0) 50%);
 }
 .ikWSlH {
     display: flex;
@@ -1798,4 +1814,21 @@
 }
 .erPQzq .suffix {
     opacity: 0.5;
+}
+.cuPxwd {
+    padding: 2.5rem 0px;
+    color: rgba(153, 164, 176, 0.6);
+    line-height: 1;
+    text-align: center;
+    height: 100%;
+    min-height: 16.25rem;
+    position: relative;
+}
+.cuPxwd img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -6.875rem 0px 0px -6.25rem;
+    width: 12.5rem;
+    height: 12.5rem;
 }

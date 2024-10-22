@@ -24,6 +24,19 @@ const handleIsLogin = ((response)=>{
     location.href = "/"
 })
 
+export class AUTH_Script{
+    constructor(){
+        this.url = serverUrl()
+    }
+    async googleAuth(){
+        const path = "auth/google"
+        await axios.post(this.url + path)
+        .then(()=>{
+            console.log()
+        })
+    }
+}
+
 const handleGoogleAuthentication = (async(data)=>{
     let response = ""
     loading.set(true)
@@ -44,7 +57,7 @@ export const handleGoogleAuth = (async(device)=>{
     let response = "";
     loading.set(true);
     const auth = getAuth(app);
-await signInWithPopup(auth, new GoogleAuthProvider())
+    await signInWithPopup(auth, new GoogleAuthProvider())
     .then(async(res)=>{
         let user = res?.user
         response = await handleGoogleAuthentication({...user, device})

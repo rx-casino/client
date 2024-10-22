@@ -12,8 +12,6 @@
     import Balance from "./homeComponent/balance.svelte";
     const dispatch = createEventDispatcher();
 
-    const logo = new URL('$lib/images/rx-casino-logo.png', import.meta.url).href;
-    const badge = new URL('../lib/images/profile pic/avatar44.png', import.meta.url).href;
     export let sideHasExpand;
     export let chat;
     export let menu;
@@ -46,7 +44,7 @@
         <div class="css-1gjaexy">
             <div class="css-1orxpag">
                 <a href="/">
-                    <img src="{logo}" class="logo" alt="rollbit">
+                    <img src="/assets/logo.png" class="logo" alt="rollbit">
                 </a>
             </div>
             <div class="css-1orxpag" style="margin-left: 0px;">
@@ -132,7 +130,7 @@
                 <div class="css-15ztagm">
                     <a href="/" style="margin-right: auto;">
                         {#if $screen > 480}
-                            <img src="{logo}" class="logo" alt="rollbit" style="margin-left: 10px;">
+                            <img src="/assets/logo.png" class="logo" alt="rollbit" style="margin-left: 10px;">
                         {/if}
                         {#if $screen < 480}
                             <img src="https://res.cloudinary.com/dxwhz3r81/image/upload/v1719796036/Cas_najlrp_q9m22k.png" class="logo2" alt="rollbit" style="margin-left: 10px;">
@@ -221,7 +219,7 @@
     <div class="css-1cfnue">
         <div class="css-15ztagm">
             <a href="/" style="margin-right: auto;">
-                <img src="{logo}" alt="" class="logo" style="margin-left: 10px;"></a>
+                <img src="/assets/logo.png" alt="" class="logo" style="margin-left: 10px;"></a>
                 <button on:click={()=> goto(`${$url === "/" ? "" : $url}/?tab=auth&modal=login`)} class="css-bt07qr" style="margin-left: 0px;">Login</button>
                 <button on:click={()=> goto(`${$url === "/" ? "" : $url}/?tab=auth&modal=signup`)} class="css-vmbe4r">Join Now</button>
         </div>
@@ -265,7 +263,7 @@
 <div class="css-1cn0dze" style="height: 64px;">
 <div class="css-jbqya4">
     <a href="/" style="margin-right: auto;">
-        <img src="{logo}" class="logo" alt="cyclix">
+        <img src="/assets/logo.png" class="logo" alt="cyclix">
     </a>
         <button on:click={()=> goto(`${$url === "/" ? "" : $url}/?tab=auth&modal=login`)} class="css-1wkotyo">Login</button>
         <button on:click={()=> goto(`${$url === "/" ? "" : $url}/?tab=auth&modal=signup`)} class="css-1psueex">Join Now</button>

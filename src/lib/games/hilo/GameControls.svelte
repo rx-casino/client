@@ -1,14 +1,14 @@
 <script>
   import { browser } from "$app/environment";
-  import { screen, is_open__Appp, is_open__chat } from "$lib/store/screen";
+  import { newScreen } from "$lib/store/screen";
   import { onMount, createEventDispatcher } from "svelte";
   import { default_Wallet } from "$lib/store/coins";
   import { goto } from "$app/navigation";
   import { url } from "$lib/store/routes";
-  import { handleisLoggin } from "$lib/store/profile";
+  import {  isLoggin} from "$lib/store/activities";
   import Tooltip from "$lib/components/tooltip.svelte";
   import { hilo_game, processingRequest, hotkeysEnabled} from "$lib/games/hilo/store";
-  import Loader from "$lib/components/loader.svelte";
+  import Loader from "$lib/loader.svelte";
   import useDeck from "./hooks/deck";
   const { getCardRank, ranks } = useDeck();
   const dispatch = createEventDispatcher();
@@ -20,17 +20,17 @@
   $: betRange = { min: 10, max: 5000 };
   $: slider = null;
 
-  $: coin_image = $hilo_game?.token_img || $default_Wallet.coin_image || "/coin/BTC.black.png";
+  $: coin_image = $hilo_game?.token_img || $default_Wallet?.coin_image || "https://cryptologos.cc/logos/thumbs/solana.png?v=034";
   $: isLoading = $processingRequest || !$hilo_game;
   $: currentRound = null;
   $: canGoNext = !isLoading && !!$hilo_game?.bet_id && !$hilo_game?.has_ended;
   $: canSkip = !isLoading &&  !!$hilo_game?.bet_id && !$hilo_game?.round <= 51 && !$hilo_game?.has_ended;
 
-  $: canBet = !!bet_amount && $default_Wallet.balance >= bet_amount && (!$hilo_game?.bet_id || $hilo_game?.has_ended || $hilo_game?.new_game);
+  $: canBet = !!bet_amount && $default_Wallet?.balance >= bet_amount && (!$hilo_game?.bet_id || $hilo_game?.has_ended || $hilo_game?.new_game);
   $: canCashOut = !!$hilo_game?.bet_id && !$hilo_game?.has_ended && !!$hilo_game?.profit;
 
   const updateUSD = () => {
-    if ($default_Wallet.coin_name === "WGF") {
+    if ($default_Wallet?.coin_name === "Fun Coupons") {
       usd = 0;
       return;
     }
@@ -41,8 +41,8 @@
   };
   default_Wallet.subscribe((v) => {
     if (!$hilo_game?.bet_id) {
-      const rate = v.coin_name === "WGD" ? 0.1 : 1;
-      if (v.coin_name !== "WGF") {
+      const rate = v?.coin_name === "SOL" ? 0.1 : 1;
+      if (v?.coin_name !== "Fun Coupons") {
         betRange = {
           min: 0.0001 / rate,
           max: 140 / rate,
@@ -135,8 +135,7 @@
   $: isGrabbing = false;
   $: sliderPercentage = 0;
 
-  $: inputDisabled = !$handleisLoggin || (!!$hilo_game && $hilo_game.bet_id && !$hilo_game.has_ended) || $default_Wallet.coin_name === "WGD";
-
+  $: inputDisabled = !$isLoggin || (!!$hilo_game && $hilo_game.bet_id && !$hilo_game.has_ended);
   const handleSliderMove = (e) => {
     if (isGrabbing) {
       const offsetX = slider?.getBoundingClientRect()?.left || 0;
@@ -199,8 +198,8 @@
   };
 
   const handleBetOrCashout = () => {
-    if (!$handleisLoggin) {
-      goto(`${$url === "/" ? "" : $url}/?tab=login&modal=auth`);
+    if (!$isLoggin) {
+      goto(`${$url === "/" ? "" : $url}/?tab=auth&modal=login`);
       return;
     }
     if ((!canBet && !canCashOut) || isLoading) return;
@@ -256,32 +255,16 @@
     };
   });
 
-  $: newScreen = 0
-  $: {
-    if($is_open__Appp && !$is_open__chat){
-      newScreen = $screen - 240
-    }
-    else if(!$is_open__Appp && $is_open__chat){
-      newScreen = $screen - 432
-    }
-    else if(!$is_open__Appp && !$is_open__chat){
-      newScreen = $screen - 72
-    }
-    else if($is_open__Appp && $is_open__chat){
-      newScreen = $screen - 600
-    }
-  }
-
 
 </script>
 
-<div id="Hilo-control-0" class="sc-hLVXRe cYiOHZ game-control style0  {newScreen < 1000 ? "mobile-view" : ""}">
+<div id="Hilo-control-0" class="sc-hLVXRe cYiOHZ game-control style0  {$newScreen < 1000 ? "mobile-view" : ""}">
   <div class="game-control-panel">
     <div class="sc-fSDTwv kqpylJ">
       <div class="sc-fUQcsx kqrzPs betting">
         <div
           class="sc-ezbkAF gWrsXy input sc-fvxzrP gOLODp sc-gsFzgR gcQjQT fCSgTW game-coininput"
-          disabled={inputDisabled}
+ 
         >
           <div class="input-label">
             <div class="sc-hmvnCu efWjNZ label">
