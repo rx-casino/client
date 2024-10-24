@@ -1,7 +1,7 @@
 <script>
 import "../styles/side-bar.css"
 import { url } from "$lib/store/routes";
-$: showDropDown = true
+$: showDropDown = false
 import { screen } from "$lib/store/screen";
 import { goto } from "$app/navigation"
 
@@ -101,13 +101,13 @@ import { goto } from "$app/navigation"
                     Crash
                 </a>
 
-                <a class="{$url === "/mines" ? "css-1ia53et" : "css-1js53w7"}" href="/mines">
+                <a class="{$url === "/hilo" ? "css-1ia53et" : "css-1js53w7"}" href="/hilo">
                     <div class="css-qlws2f">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" size="19.5" class="css-ovayo2">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M17.9999 14.6842C18.0024 14.7624 17.9596 14.8355 17.8865 14.8657C17.8613 14.8758 17.8362 14.8833 17.8109 14.8833C17.7606 14.8833 17.7127 14.8632 17.6774 14.8279L12.8791 10.0296L12.5036 10.4051C12.4306 10.4807 12.3095 10.4807 12.2365 10.4051L9.59293 7.76397C9.51991 7.69095 9.51991 7.5699 9.59293 7.49688L9.97101 7.11881L5.17274 2.32302C5.11731 2.26759 5.10215 2.18439 5.13489 2.1138C5.16522 2.04066 5.23823 1.99529 5.31635 2.00039C7.36011 2.10118 9.81467 3.19743 12.0752 5.01436L12.2365 4.87727C12.3096 4.80413 12.4306 4.80413 12.5036 4.87727L15.1446 7.52084C15.2202 7.59386 15.2202 7.71491 15.1446 7.78793L14.9858 7.92501C16.8028 10.1831 17.8991 12.6405 17.9999 14.6842ZM15.6722 6.49673L13.5 4.32197C14.1073 3.97169 14.9012 4.05488 15.4227 4.57644C15.9419 5.09558 16.0276 5.8893 15.6722 6.49674L15.6722 6.49673ZM4.27827 17.6907L10.9681 10.9657L9 8.99999L2.31018 15.7225C1.84647 16.1862 1.90944 17.0077 2.45379 17.5495C2.96287 18.0637 3.79189 18.1771 4.27827 17.6907Z" fill="currentColor"></path>
                         </svg>
                     </div>
-                    Mines
+                    Hilo
                 </a>
 
                 <a class="{$url === "/classic-dice" ? "css-1ia53et" : "css-1js53w7"}" href="/classic-dice">

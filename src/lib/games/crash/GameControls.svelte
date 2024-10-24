@@ -2003,7 +2003,12 @@
     align-items: center;
     height: 1rem;
   }
-
+  .cYiOHZ.style1{
+    flex-direction: row-reverse;
+  }
+  .cYiOHZ.style1 .game-control-switch > button.is-active{
+      border-bottom: 1px solid transparent;
+  }
   .cYiOHZ .input-control {
     background-color: rgba(49, 52, 60, 0.4);
   }

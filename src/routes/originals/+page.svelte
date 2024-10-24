@@ -1,6 +1,6 @@
 <script>
    import "../../styles/home.css"
-   import LiveLayout from "$lib/homeComponent/liveLayout.svelte";
+   // import LiveLayout from "$lib/homeComponent/liveLayout.svelte";
    import NavTabs from "$lib/homeComponent/navTabs.svelte";
    import { handleListGame} from "$lib/homeComponent/hook"
    import { goto } from "$app/navigation";
@@ -8,13 +8,13 @@
 </script>
 
 <div class="css-7oel5t">
-   <LiveLayout />
+   <!-- <LiveLayout /> -->
    <div style="height: 24px;"></div>
    <NavTabs />
    <div class="css-ojf8hg">
       <div class="css-1yx9de1">
          <div class="css-1y4bokc">
-            <div class="css-1umk8r2">
+            <!-- <div class="css-1umk8r2">
                <svg width="20px" height="20px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" size="18" class="css-oluyn3" style="margin-right: 10px; color: rgb(94, 98, 111);">
                   <title>search</title>
                   <g id="search" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -42,7 +42,7 @@
                      <path d="M0.934258 -6.17707e-07L7.06574 -8.16755e-08C7.46509 -4.67634e-08 7.70329 0.445072 7.48177 0.77735L4.41602 5.37596C4.21811 5.67283 3.78189 5.67283 3.58397 5.37596L0.518233 0.777349C0.296715 0.445072 0.534911 -6.52619e-07 0.934258 -6.17707e-07Z" fill="currentColor"></path>
                   </svg>
                </span>
-            </button>
+            </button> -->
          </div>
          <div class="css-1l01j61">
             {#each handleListGame() as game}

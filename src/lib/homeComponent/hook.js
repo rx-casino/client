@@ -2,22 +2,22 @@
 export const handleListGame = (()=>{
     let gameList = []
     return gameList = [
-        {id:1, name: "Crash", url:"crash", img: new URL('../../lib/images/crash (1).png', import.meta.url).href, super: true, houseEdge: 1 },
-        {id:1, name: "Classic Dice", url:"classic-dice", img: new URL('../../lib/images/classic_dice (2).png', import.meta.url).href, super: true, houseEdge: 1 },
-        {id:1, name: "Mines", url:"mines", img: new URL('../../lib/images/mine (1).png', import.meta.url).href, super: false, houseEdge: 1 },
-        {id:1, name: "Plinko", url:"coming-soon", img: new URL('../../lib/images/plinko (1).png', import.meta.url).href, super: false, houseEdge: 1 },
-        {id:1, name: "Keno", url:"coming-soon", img: new URL('../../lib/images/keno (1).png', import.meta.url).href, super: false, houseEdge: 1 },
-        {id:1, name: "Hilo", url:"hilo", img: new URL('../../lib/images/hilo (1).png', import.meta.url).href, super: false, houseEdge: 1 },
-        {id:1, name: "Tower Legend", url:"coming-soon", img:  new URL('../../lib/images/tower_legend (1).png', import.meta.url).href, super: false, houseEdge: 1 },
-        {id:1, name: "Hash Dice", url:"coming-soon", img: new URL('../../lib/images/hash_dice (1).png', import.meta.url).href, super: false, houseEdge: 1 },
-        {id:1, name: "Ultimate Dice", url:"coming-soon", img: new URL('../../lib/images/ultimate_dice.png', import.meta.url).href, super: false, houseEdge: 1 },
-        {id:1, name: "Coin Flip", url:"coming-soon", img: new URL('../../lib/images/coinflip (1).png', import.meta.url).href, super: false, houseEdge: 1 },
-        {id:1, name: "Blackjack", url:"coming-soon", img: new URL('../../lib/images/blackjack (1).png', import.meta.url).href, super: false, houseEdge: 1 },
+        {id:1, name: "Crash", url:"crash", img: "/assets/originals/crash (1).png", super: true, houseEdge: 1 },
+        {id:1, name: "Classic Dice", url:"classic-dice", img: '/assets/originals/classic_dice (2).png', super: true, houseEdge: 1 },
+        // {id:1, name: "Mines", url:"mines", img: new URL('../../lib/images/mine (1).png', import.meta.url).href, super: false, houseEdge: 1 },
+        {id:1, name: "Plinko", url:"plinko", img: '/assets/originals/plinko (1).png', super: false, houseEdge: 1 },
+        // {id:1, name: "Keno", url:"coming-soon", img: new URL('/assets/originals/keno (1).png', import.meta.url).href, super: false, houseEdge: 1 },
+        {id:1, name: "Hilo", url:"hilo", img: '/assets/originals/hilo (1).png', super: false, houseEdge: 1 },
+        // {id:1, name: "Tower Legend", url:"coming-soon", img:  new URL('../../lib/images/tower_legend (1).png', import.meta.url).href, super: false, houseEdge: 1 },
+        // {id:1, name: "Hash Dice", url:"coming-soon", img: new URL('../../lib/images/hash_dice (1).png', import.meta.url).href, super: false, houseEdge: 1 },
+        // {id:1, name: "Ultimate Dice", url:"coming-soon", img: new URL('../../lib/images/ultimate_dice.png', import.meta.url).href, super: false, houseEdge: 1 },
+        // {id:1, name: "Coin Flip", url:"coming-soon", img: new URL('../../lib/images/coinflip (1).png', import.meta.url).href, super: false, houseEdge: 1 },
+        // {id:1, name: "Blackjack", url:"coming-soon", img: new URL('../../lib/images/blackjack (1).png', import.meta.url).href, super: false, houseEdge: 1 },
         // {id:1, name: "Beauties", url:"?beauties", img: new URL('../../lib/images/beauties.png', import.meta.url).href, super: false, houseEdge: 1 },
-        {id:1, name: "Baccarat", url:"coming-soon", img: new URL('../../lib/images/baccarat (1).png', import.meta.url).href, super: false, houseEdge: 1 },
-        {id:1, name: "Video poker", url:"coming-soon", img: new URL('../../lib/images/video_poker.png', import.meta.url).href, super: false, houseEdge: 1 },
-        {id:1, name: "Roulette", url:"coming-soon", img: new URL('../../lib/images/roulette (1).png', import.meta.url).href, super: false, houseEdge: 1 },
-        {id:1, name: "Limbo", url:"coming-soon", img: new URL('../../lib/images/limbo (1).png', import.meta.url).href, super: false, houseEdge: 1 }
+        // {id:1, name: "Baccarat", url:"coming-soon", img: new URL('../../lib/images/baccarat (1).png', import.meta.url).href, super: false, houseEdge: 1 },
+        // {id:1, name: "Video poker", url:"coming-soon", img: new URL('../../lib/images/video_poker.png', import.meta.url).href, super: false, houseEdge: 1 },
+        // {id:1, name: "Roulette", url:"coming-soon", img: new URL('../../lib/images/roulette (1).png', import.meta.url).href, super: false, houseEdge: 1 },
+        // {id:1, name: "Limbo", url:"coming-soon", img: new URL('../../lib/images/limbo (1).png', import.meta.url).href, super: false, houseEdge: 1 }
     ]
 })
 
