@@ -16,6 +16,7 @@ $: tabOffset = $newScreen > 1100 ? 0 : 1;
 $: currentTab = !tabOffset && currentTab === 3 ? 1 : (currentTab || 1);
 $: gameInit = false;
 
+
 onMount(async () => {
   if (browser) {
     try {

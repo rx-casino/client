@@ -5,6 +5,7 @@
     left: 0px;
     height: calc(-64px + 100vh);
     transform: translateZ(0px);
+    z-index: 10;
 }
 .css-12khlxv {
     position: relative;
@@ -566,20 +567,6 @@
     outline: none;
     border: none;
     background: none;
-}
-.css-1nfl9e5 {
-    z-index: 1000;
-    position: fixed;
-    max-width: 360px;
-    transform: translateZ(0px);
-    width: 100%;
-}
-.css-1nfl9e5 {
-    z-index: 1000;
-    position: fixed;
-    max-width: 360px;
-    transform: translateZ(0px);
-    width: 100%;
 }
 
 .css-8sz5vj {

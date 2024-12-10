@@ -70,24 +70,19 @@
    $: chat = false
 
    const handleChatSection = (()=>{
-      if(menu){
          menu = false
          chat = true
-      }
-      else {
-         chat =! chat
-      }
    })
 
    const handleMenuSection = (()=>{
-      if(chat){
          chat = false
          menu = true
-      }else {
-         menu =! menu
-      }
    })
 
+   const handleHomeSelection = (()=>{
+         chat = false
+         menu = false
+   })
    onMount(()=>{
       if(!$isLoggin && $url === "/verification"){
          goto("/")
@@ -130,7 +125,7 @@
 <Toaster position="bottom-left" expand={true} richColors  />
 {#if $screen && $device}
    <div id="root" >
-      <Navbar sideHasExpand={sideHasExpand} chat={chat} menu={menu} on:return={()=> sideHasExpand = 248} on:chat={handleChatSection} on:menu={handleMenuSection}/>
+      <Navbar sideHasExpand={sideHasExpand} chat={chat} menu={menu} on:home={handleHomeSelection} on:return={()=> sideHasExpand = 248} on:chat={handleChatSection} on:menu={handleMenuSection}/>
          {#if $screen < 750}
             <div style="min-height: 112px;"></div>
          {:else}

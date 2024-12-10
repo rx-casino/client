@@ -527,7 +527,6 @@
     font-size: 14px;
     color: #fff;
     background: var(--primary-color);
-    box-shadow: #a203aa 0px 0px 10px, rgba(255, 255, 255, 0.2) 0px 1px 0px inset, rgba(0, 0, 0, 0.15) 0px -3px 0px inset, #ff0fa3 0px 0px 12px inset;
     margin-left: -12px;
     border-radius: 0px 6px 6px 0px;
     padding: 0px;
@@ -570,9 +569,13 @@
 .css-1nfl9e5 {
     z-index: 1000;
     position: fixed;
-    max-width: 360px;
     transform: translateZ(0px);
     width: 100%;
+}
+@media only screen and (min-width: 500px) {
+    .css-1nfl9e5 {
+        max-width: 360px;
+    }
 }
 .css-rymlxq {
     height: 100%;

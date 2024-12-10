@@ -30,6 +30,7 @@ export class App_script{
     }
     async handleProfile(secret){
         this.secret = secret
+        console.log(secret)
         const path = "/api/profile/user"
         await axios.get(this.serverUrl + path,{ headers: this.header})
         .then((res)=>{

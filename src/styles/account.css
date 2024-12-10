@@ -899,9 +899,3 @@ input[type=radio], input[type=checkbox] {
     }
 }
 
-@media (max-width: 767px) {
-    .css-t60dms {
-        padding: 4px;
-    }
-}
-
