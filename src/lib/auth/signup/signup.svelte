@@ -1,8 +1,7 @@
 <script>
-    import { useSignupHook } from "../hook"
-    import { url } from "$lib/store/routes";
+    import { app } from '$lib/store/app';
     import { device } from "$lib/store/profile";
-    import { goto } from "$app/navigation";
+    import { browser } from '$app/environment'
     import Google from "../google/google.svelte";
     export let referral;
 
@@ -18,15 +17,16 @@
     $: letter = passLowercase && passUppercase
     $: specialChar = isContainsSymbol.test(password) 
     $: devic = { ...$device, Login_time: new Date(), type :"Email Registration"}
-    
     $: track = !username || !email || !password || loading || !_8to30Characters || !letter || !specialChar 
 
     const handleSubmit = (async()=> {
         loading = true
         if(!track){
-           let response = await useSignupHook({username, email, password, referral, device:devic})
-           if(response){
-                goto($url)
+           const {status} = await $app?.auth?.signup({username, email, password, referral, device:devic})
+           if(status === "success"){
+                if(browser){
+                    window.location.href = "/"
+                }
            }
            loading = false
         }

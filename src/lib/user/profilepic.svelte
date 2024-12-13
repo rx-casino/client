@@ -1,10 +1,9 @@
 <script>
-    import { handleChangeProflePicture } from "$lib/index";
    import { url } from "$lib/store/routes";
    import { user } from "$lib/store/profile";
    import { goto } from "$app/navigation";
    import Loader from "$lib/loader.svelte";
-   import { handleAuthToken } from "$lib/store/routes";
+   import { app } from '$lib/store/app';
     export let _user
     $: activeImge = _user?.profileImg || ""
     let Images = [
@@ -45,7 +44,7 @@ const previewImage = (event) => {
 let loadImage = false
    const handleSaved = (async()=>{
       loadImage = true
-         const {response} = await handleChangeProflePicture(activeImge, $handleAuthToken)
+         const {response} = await $app.handleChangeProflePicture(activeImge)
          if(response){
             user.set(response)
             goto($url)

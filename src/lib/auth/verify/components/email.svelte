@@ -1,19 +1,18 @@
 <script>
-    import { handleCreateOtp, handleVerifyEmail } from "../../hook"
-    import { handleAuthToken, otp} from "$lib/store/routes";
     import { seaser } from "$lib/store/routes";
     import { goto } from "$app/navigation"
     import { user } from "$lib/store/profile";
     import Loader from "$lib/loader.svelte"
     import VerifyEmail from "./verifyEmail/verifyEmail.svelte";
     import { url } from "$lib/store/routes";
+    import { app } from '$lib/store/app';
 
     $: loading = false
     $: tab = $seaser[0]
 
   const createOtp = (async()=>{
     loading = true
-    const repo = await handleCreateOtp($handleAuthToken)
+    const repo = await $app?.handleCreateOtp()
     if(repo){
         goto(`${$url === "/" ? "" : $url}/?tab=verify-email&re=${repo?.token}`)
     }

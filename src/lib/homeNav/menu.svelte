@@ -1,11 +1,16 @@
 <script>
-     import { handleIsLogout } from "$lib/auth/hook";
+     import { app } from '$lib/store/app';
     import { user } from "$lib/store/profile";
     import { createEventDispatcher } from "svelte";
     const dispatch = createEventDispatcher();
     const handleClosePoppups = (()=>{
         dispatch("close")
     })
+
+    function logout(){
+        $app?.auth?.logout()
+    }
+    
 </script>
 
 <div id="rollbit-modal-popover-container">
@@ -88,7 +93,7 @@
                             </div>
                             <div>Settings</div>
                         </a>
-                        <button on:click={handleIsLogout} class="css-9amg51" >
+                        <button on:click={logout} class="css-9amg51" >
                             <div class="css-e2va8o">
                                 <svg viewBox="0 0 20 15" xmlns="http://www.w3.org/2000/svg" size="18" class="css-oluyn3">
                                     <path d="m5.02658413 5.99571522v-2.68836087l-4.84472043 3.77755652 4.84472043 3.77755653v-2.6268174c.00623348.00026739.0125.00040217.01879674.00040217h7.72059673c.2401537 0 .4348367-.1949326.4348367-.43469347v-1.37135c0-.24007392-.1955597-.43469348-.4348367-.43469348h-7.72059673c-.00629783 0-.01256413.00013478-.01879674.0004zm1.44042457-1.95844783c1.13171956-2.38698043 3.5599417-4.03726739 6.3728572-4.03726739 3.8944019 0 7.0514384 3.16320652 7.0514384 7.06521739 0 3.90201091-3.1570365 7.06521741-7.0514384 7.06521741-2.8129155 0-5.24113764-1.650287-6.3728572-4.0372674h2.343095c.91890956 1.2257609 2.3819239 2.0186348 4.0297622 2.0186348 2.7817156 0 5.0367417-2.25943263 5.0367417-5.04658481 0-2.78715217-2.2550261-5.04658478-5.0367417-5.04658478-1.6478383 0-3.11085264.79287391-4.0297622 2.01863478z"></path>

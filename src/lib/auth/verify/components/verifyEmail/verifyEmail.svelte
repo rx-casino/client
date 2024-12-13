@@ -1,12 +1,11 @@
 <script>
     import { browser } from '$app/environment'
-        import { handleVerifyEmail } from "../../../../auth/hook"
     import { onMount } from 'svelte';
-    import { handleAuthToken} from "$lib/store/routes";
     import { url } from "$lib/store/routes";
     import Loader from "$lib/loader.svelte"
     import { seaser } from "$lib/store/routes";
     import { goto } from "$app/navigation"
+    import { app } from '$lib/store/app';
 
     let code = ""
     $: loading = false
@@ -15,7 +14,7 @@
 
     const handleEmail = (async()=>{
         loading = true
-        const response = await handleVerifyEmail(code, token, $handleAuthToken)
+        const response = await $app?.handleVerifyEmail(code, token)
         loading = false
         if(response){
             goto($url)

@@ -4,13 +4,12 @@
    import { user } from "$lib/store/profile";
    import { goto } from "$app/navigation";
    import { onMount } from "svelte";
-   import { handleChangeProflePicture } from "$lib/index";
    import { loading } from "$lib/store/activities";
    import { url } from "$lib/store/routes";
-   import { handleChangeUsername, handleChangeProfilePrivacy, handleGoogleLink } from "$lib/auth/hook"
    const badge = new URL('../../../lib/images/badges/bronze1.png', import.meta.url).href
    import { handleAuthToken } from "$lib/store/routes";
    import Loader from "../../../lib/loader.svelte";
+   import { app } from '$lib/store/app';
 
 let Images = [
     { img: "https://res.cloudinary.com/dxwhz3r81/image/upload/v1720390192/avatar55_rtiys4.png", active: false},
@@ -33,7 +32,7 @@ let Images = [
    const handleChangeUsernameHook = (async()=>{
       if(username){
          ChangeUsernameHook = true
-         await handleChangeUsername(username, $handleAuthToken)
+         await $app?.handleChangeUsername(username, $handleAuthToken)
          ChangeUsernameHook = false
          username = ""
       }
@@ -42,12 +41,12 @@ let Images = [
    const handlePrivacy = (async()=>{
       ishandlePrivacy = true
       profileHidden =! profileHidden
-       await handleChangeProfilePrivacy(profileHidden, $handleAuthToken)
+       await $app?.handleChangeProfilePrivacy(profileHidden, $handleAuthToken)
        ishandlePrivacy = false
    })
    
    const handleLinkEmail = (async()=>{
-      await handleGoogleLink($handleAuthToken)
+      await $app?.handleGoogleLink($handleAuthToken)
    })
 
    onMount(()=>{
@@ -78,7 +77,7 @@ let loadImage = false
 const handleSaved = (async()=>{
    loadImage = true
    if($user?.profileImg !== profile_picture){
-      const {response, error} = await handleChangeProflePicture(profile_picture, $handleAuthToken)
+      const {response, error} = await $app?.handleChangeProflePicture(profile_picture, $handleAuthToken)
       if(response){
          user.set(response)
          isEdit = false
@@ -318,7 +317,7 @@ const previewImage = (event) => {
      
    </div>
 </div>
-{#if !$user.is_verified}
+{#if !$user?.is_verified}
    <Verification />
 {/if}
 

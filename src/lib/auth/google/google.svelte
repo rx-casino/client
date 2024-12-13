@@ -1,17 +1,20 @@
 <script>
-  import { handleGoogleAuth } from "../hook";
-  import { url } from "$lib/store/routes";
-  import { goto } from "$app/navigation";
+  import { app } from '$lib/store/app';
   import { device } from "$lib/store/profile";
-  const google = new URL('../../../lib/images/signin-assets/Web (mobile + desktop)/', import.meta.url).href;
+  import Loader from '../../loader.svelte';
+  import { browser } from '$app/environment'
   export let text 
-
+  $: loading = false
   $: devic = { ...$device, Login_time: new Date()}
   const handleGoogleAuthenticator = (async()=>{
-    const response = await handleGoogleAuth(devic)
-      if(response){
-        goto($url)
-      } 
+    loading = true
+    const {status} = await $app?.auth?.handleGoogleAuth(devic)
+    if(status === "success"){
+      if(browser){
+          window.location.href = "/"
+      }
+    }
+    loading = false
   })
 
 </script>
@@ -27,7 +30,12 @@
         <path fill="none" d="M0 0h48v48H0z"></path>
       </svg>
     <span>
-    {text}
+      {text}
+      {#if loading}
+        <Loader />
+      {/if}
+ 
+ 
     </span>
 </button>
 

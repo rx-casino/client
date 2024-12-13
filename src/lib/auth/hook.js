@@ -1,253 +1,84 @@
 import axios from "axios";
+import { toast } from "svelte-sonner"
 import firebase from "firebase/compat/app";
 import "firebase/firestore";
 import { serverUrl } from "$lib/backendUrl";
-import { handleResposeMessages,  loading , isLoggin} from "$lib/store/activities";
-import { coin_list } from "$lib/store/coins";
-import { user } from "$lib/store/profile";
-import { browser } from '$app/environment';
-import { handleAuthToken, otp } from "$lib/store/routes";
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { firebaseConfiguration } from "./firebaseConfig";
+import { handleResposeMessages,  loading } from "$lib/store/activities";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-const firebaseConfig = firebaseConfiguration()
-export const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app);
+import { fb } from "./firebaseConfig"
+import { deleteCookie, setCookie } from "../store/cookies";
 
-const handleIsLogin = ((response)=>{
-    handleAuthToken.set(response?.token)
-    user.set(response?.user)
-    coin_list.set(response?.wallet)
-    browser && localStorage.setItem("drr", JSON.stringify(response?.token));
-    loading.set(false)
-    location.href = "/"
-})
 
 export class AUTH_Script{
-    constructor(){
-        this.url = serverUrl()
+    constructor(url){
+        this.url = url
+        this.status = ""
     }
-    async googleAuth(){
-        const path = "auth/google"
-        await axios.post(this.url + path)
-        .then(()=>{
-            console.log()
+    async login(data){
+        await axios.post(`${this.url}/auth/login`,{
+            auth: data
         })
+        .then((res)=>{
+            setCookie("secret", res.data?.token)
+            toast.success("Welcome back")
+            this.status = "success"
+        })
+        .catch((err)=> {
+            toast.error(err.response?.data)
+            this.status = "failed"
+        })
+        return {status:this.status}
+    }
+    async signup(data){
+        await axios.post(`${this.url}/auth/signup`,{
+            auth: data
+        })
+        .then((res)=>{
+            setCookie("secret", res.data?.token)
+            toast.success("Registered successfully")
+            this.status = "success"
+        })
+        .catch((err)=> {
+            toast.error(err.response?.data)
+            this.status = "failed"
+        })
+        return {status:this.status}
+    }
+    async handleGoogleAuthentication(data){
+        let response = null
+        await axios.post(`${this.url}/auth/google`,{
+            auth: data
+        })
+        .then((res)=>{
+            response = res.data?.token
+        })
+        .catch((err)=> {
+            toast.error(err.response?.data)
+        })
+        return response
+    }
+    
+    async handleGoogleAuth(device){
+        const auth = getAuth(fb);
+        await signInWithPopup(auth, new GoogleAuthProvider())
+        .then(async(res)=>{
+            let user = res?.user
+            let _response = await this.handleGoogleAuthentication({...user, device})
+            setCookie("secret", _response)
+            toast.success("Logged In successful")
+            this.status = "success"
+        })
+        .catch((err)=>{
+            toast.error(err.code.slice(5))
+            this.status = "failed"
+        })
+        return {status:this.status}
+    }
+    logout(){
+        deleteCookie("secret")
     }
 }
 
-const handleGoogleAuthentication = (async(data)=>{
-    let response = ""
-    loading.set(true)
-    await axios.post(`${serverUrl()}/auth/google`,{
-        auth: data
-    })
-    .then((res)=>{
-        response = res.data
-        handleIsLogin(response)
-    })
-    .catch((err)=> {
-        handleResposeMessages("error",err.response?.data)
-    })
-    return response
-})
-
-export const handleGoogleAuth = (async(device)=>{
-    let response = "";
-    loading.set(true);
-    const auth = getAuth(app);
-    await signInWithPopup(auth, new GoogleAuthProvider())
-    .then(async(res)=>{
-        let user = res?.user
-        response = await handleGoogleAuthentication({...user, device})
-    })
-    .catch((err)=>{
-        handleResposeMessages("error",err.code.slice(5))
-    })
-    return response
-})
-
-export const handleIsLogout = (()=>{
-    browser && localStorage.removeItem("drr");
-    loading.set(false)
-    isLoggin.set(false)
-    browser && sessionStorage.removeItem("change-email");
-    browser && sessionStorage.removeItem("otp");
-    browser &&  sessionStorage.setItem('password', false);
-    location.href = "/"
-})
-
-export const useSignupHook = (async(data)=> {
-    loading.set(true)
-    let response = ""
-    await axios.post(`${serverUrl()}/auth/signup`,{
-        auth: data
-    })
-    .then((res)=>{
-        response = res.data
-        handleIsLogin(response)
-    })
-    .catch((err)=> {
-        handleResposeMessages("error",err.response?.data)
-    })
-    return response
-}) 
-
-export const handleLoginUser = (async(data)=>{
-    loading.set(true)
-    let response = ""
-    await axios.post(`${serverUrl()}/auth/login`,{
-        auth: data
-    })
-    .then((res)=>{
-        response = res.data
-        if(!response?.type){
-            handleIsLogin(response)
-        }
-    })
-    .catch((err)=> {
-        handleResposeMessages("error",err.response?.data)
-    })
-    return response
-})
-
-export const handleKYCverification1 = (async(data, auth)=>{
-    loading.set(true)
-    let response = ""
-    await axios.post(`${serverUrl()}/api/profile/kyc-step1`,{
-        auth: data
-    },{
-        headers: {
-            Authorization: `Bearer ${auth}`
-        }
-    })
-    .then((res)=>{
-        response = res.data
-        user.set(response)
-        handleResposeMessages("success","Level 1 submitted successfully")
-    })
-    .catch((err)=> {
-        handleResposeMessages("error",err.response?.data)
-    })
-    return response
-})
-
-export const handleChangeUsername = (async(data, auth)=>{
-    let response = ""
-    await axios.post(`${serverUrl()}/api/profile/username`,{
-        username: data
-    },{
-        headers: {
-            Authorization: `Bearer ${auth}`
-        }
-    })
-    .then((res)=>{
-        response = res.data
-        user.set(response)
-        handleResposeMessages("success","Username updated successfully")
-    })
-    .catch((err)=> {
-        handleResposeMessages("error",err.response?.data)
-    })
-    return response
-})
-
-export const handleChangeProfilePrivacy = (async(data, auth)=>{
-    loading.set(true)
-    let response = ""
-    await axios.post(`${serverUrl()}/api/profile/privacy`,{
-        private: data
-    },{
-        headers: {
-            Authorization: `Bearer ${auth}`
-        }
-    })
-    .then((res)=>{
-        response = res.data
-        handleResposeMessages("success","Your profile visibility is updated")
-        user.set(response)
-    })
-    .catch((err)=> {
-        handleResposeMessages("error",err.response?.data)
-    })
-    return response
-})
-
-export const handleLinkEmail = (async(data, auth)=>{
-    loading.set(true)
-    let response = ""
-    await axios.post(`${serverUrl()}/api/profile/link-email`,{
-        email: data
-    },{
-        headers: {
-            Authorization: `Bearer ${auth}`
-        }
-    })
-    .then((res)=>{
-        response = res.data
-        user.set(response)
-        handleResposeMessages("success","Your email is linked to google successfully")
-    })
-    .catch((err)=> {
-        handleResposeMessages("error",err.response?.data)
-    })
-    return response
-})
-
-export const handleCreateOtp = (async(auth)=>{
-    let response = ""
-    await axios.get(`${serverUrl()}/api/profile/create-otp`,{
-        headers: {
-            Authorization: `Bearer ${auth}`
-        }
-    })
-    .then((res)=>{
-        response = res.data
-        handleResposeMessages("success","Check your email for the one-time password")
-    })
-    .catch((err)=> {
-        handleResposeMessages("error",err.response?.data)
-    })
-    return response
-})
-
-
-export const handleVerifyEmail = (async(code, token, auth)=>{
-    loading.set(true)
-    let response = ""
-    await axios.post(`${serverUrl()}/api/profile/verify-email`,{
-        code, token
-    },{
-        headers: {
-            Authorization: `Bearer ${auth}`
-        }
-    })
-    .then((res)=>{
-        response = res.data
-        user.set(response)
-        handleResposeMessages("success","Your email is verified successfully")
-    })
-    .catch((err)=> {
-        handleResposeMessages("error",err.response?.data)
-    })
-    return response
-})
-
-
-export const handleGoogleLink = (async(authi)=>{
-    let response = "";
-    loading.set(true);
-    const auth = getAuth(app);
-    await signInWithPopup(auth, new GoogleAuthProvider())
-    .then(async(res)=>{
-        response = await handleLinkEmail(res.user?.email, authi)
-    })
-    .catch((err)=>{
-        handleResposeMessages("error",err.code.slice(5))
-    })
-    return response
-})
 
 export const handleSetGooglePassword = (async(auth, id)=>{
     loading.set(true)

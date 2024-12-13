@@ -1,7 +1,6 @@
 <script>
    import { user } from "$lib/store/profile";
-   import {fetchSumsub, updateVerifiedStatus} from "$lib/index";
-   import { handleAuthToken } from "$lib/store/routes";
+   import { app } from '$lib/store/app';
     import { onMount } from "svelte";
     $: isDoc = false
     $: token = ""
@@ -34,20 +33,20 @@
 }
 
 onMount(async()=>{
-    const response = await fetchSumsub($handleAuthToken)
+    const response = await $app?.fetchSumsub()
     token = response?.token
 })
 
 // Requests a new access token from the backend side.
 async function getNewAccessToken() {
-    let newToken = await fetchSumsub($handleAuthToken)
+    let newToken = await $app?.fetchSumsub()
     return Promise.resolve(newToken);
 }
 /**
  * Set verified flag to backend
  */
 async function setVerifiedStatus(status=false) {
-    let stats = await updateVerifiedStatus(status)
+    let stats = await $app?.updateVerifiedStatus(status)
     return Promise.resolve(stats);
 }
 

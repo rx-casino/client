@@ -1,10 +1,9 @@
 <script>
     import { seaser} from "$lib/store/routes";
+    import { browser } from '$app/environment'
     import { device } from "$lib/store/profile";
-    import { url} from "$lib/store/routes";
-    import { goto } from "$app/navigation";
+    import { app } from '$lib/store/app';
     let code = ''
-    import { handleLoginUser } from "$lib/auth/hook"
     $: loading = false
 
     $: secret = $seaser[3] || ""
@@ -15,10 +14,12 @@
     $: devic = { ...$device, Login_time: new Date(), type :"Email Login"}
     const handleForgetPassword = (async()=>{
         loading = true
-        const {response} = await handleLoginUser({password, email,user_id,code, secret, device:devic})
-        if(response){
-            goto($url)
-        }
+        const {status} =  await $app?.auth?.login({password, email,user_id,code, secret, device:devic})
+        if(status === "success"){
+                if(browser){
+                    window.location.href = "/"
+                }
+           }
         loading = false
     })
 

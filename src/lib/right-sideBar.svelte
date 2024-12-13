@@ -89,7 +89,7 @@ function loadCrash(){
                 </div>
                 {/if}
                 <div class="css-1y66pyb">Popular games On RX-Casino</div>
-                <a class="{$url === "/crash" ? "css-1ia53et" : "css-1js53w7"}" on:click={loadCrash} href="/crash">
+                <button class="{$url === "/crash" ? "css-1ia53et" : "css-1js53w7"}" on:click={loadCrash} >
                     <div class="css-qlws2f">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" size="19.5" class="css-ovayo2">
                             <path d="M6.59994 3.46153L11.1516 8.12977L8.45156 10.8989L3.89993 6.23071L3.44993 3L6.59994 3.46153Z" fill="currentColor"></path>
@@ -100,7 +100,7 @@ function loadCrash(){
                         </svg>
                     </div>
                     Crash
-                </a>
+                </button>
 
                 <a class="{$url === "/hilo" ? "css-1ia53et" : "css-1js53w7"}" href="/hilo">
                     <div class="css-qlws2f">

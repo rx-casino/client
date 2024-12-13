@@ -5,7 +5,13 @@
     import { handleListGame} from "$lib/homeComponent/hook"
     import { screen } from "$lib/store/screen";
     import { goto } from "$app/navigation";
+    import { browser} from '$app/environment';
 
+    const loadgame = (url)=>{
+        if(browser){
+            location.href = "/"+ url
+        }
+    }
    let live = [1,2,3,4,5,6,7,8,9,0,9,8,7,6]
 
 </script>
@@ -53,7 +59,7 @@
                     {#each handleListGame() as game}
                     <!-- svelte-ignore a11y-no-static-element-interactions -->
                     <!-- svelte-ignore a11y-click-events-have-key-events -->
-                        <a href="{game.url}"  class="swiper-slide swiper-slide-duplicate css-vugqe6" >
+                        <button on:click={()=> loadgame(game.url)} class="swiper-slide swiper-slide-duplicate css-vugqe6" >
                             <div style="padding-top: 10px;">
                                 <div class="css-d6icxj">
                                     <img class="css-nyormw" src="{game.img}" alt="Mines">
@@ -65,7 +71,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </a>
+                        </button>
                     {/each}
                 </swiper-container>
                 </div>

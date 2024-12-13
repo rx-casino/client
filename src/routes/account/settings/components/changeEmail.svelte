@@ -1,10 +1,10 @@
 <script>
-    import { handleChangeEmailOtp, handleChangeEmail, handleEMailChange} from "$lib/index";
     import { handleResposeMessages } from "$lib/store/activities";
     import { user } from "$lib/store/profile";
     import { handleAuthToken} from "$lib/store/routes";
     import { changeotp } from "$lib/store/routes";
     import Loader from "$lib/loader.svelte";
+    import { app } from '$lib/store/app';
     export let respose
 
     let new_email = ""
@@ -19,7 +19,7 @@
     $: loadConfirmAndSendCode = false
     const ConfirmAndSendCode = (async()=>{
         loadConfirmAndSendCode = true
-        const {isLoading, response} = await handleChangeEmailOtp($user?.user_id, {old_email, new_email})
+        const {isLoading, response} = await $app?.handleChangeEmailOtp($user?.user_id, {old_email, new_email})
         if(response){
             showWarning = false
         }
@@ -33,7 +33,7 @@
         else{
             if(!checkEmailLoad){
                 checkEmailLoad = true
-                const {response, isLoading} = await handleEMailChange($handleAuthToken, {old_email, new_email})
+                const {response, isLoading} = await $app?.handleEMailChange({old_email, new_email})
                 if(response){
                     showWarning = true
                 }
@@ -58,7 +58,7 @@
     let LoadSubmitChangeAddress = false
     const handleSubmitChangeAddress = (async()=>{
         LoadSubmitChangeAddress = true
-        const {isLoading, response} = await handleChangeEmail($user?.user_id,{_otpCode:_otpCode.replace(wsRegex, "").replace(/,/g, ", "), _2faCode:_2faCode.replace(wsRegex, "").replace(/,/g, ", "), _faToken:respose?.fa_secrete, token:$changeotp})
+        const {isLoading, response} = await $app?.handleChangeEmail($user?.user_id,{_otpCode:_otpCode.replace(wsRegex, "").replace(/,/g, ", "), _2faCode:_2faCode.replace(wsRegex, "").replace(/,/g, ", "), _faToken:respose?.fa_secrete, token:$changeotp})
         LoadSubmitChangeAddress = isLoading
     })
 

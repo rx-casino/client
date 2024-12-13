@@ -3,16 +3,16 @@
     import { user } from "$lib/store/profile";
     import { onMount } from "svelte";
     import { loading} from "$lib/store/activities";
-    import {handleGenerateSecrete, handleverifyFA_Token} from "$lib/index";
     import Loader from "$lib/loader.svelte";
     import { createEventDispatcher } from "svelte";
+    import { app } from '$lib/store/app';
     const dispatch = createEventDispatcher()
     let qrCode = '';
     let secret = '';
     let token = '';
 
     onMount(async () => {
-        const response = await handleGenerateSecrete($user?.email)
+        const response = await $app?.handleGenerateSecrete($user?.email)
         if(response){
             qrCode = response.qrCode;
             secret = response.secret;
@@ -30,7 +30,7 @@
 
     const verification = (async()=>{
         if(!$loading){
-            const response = await handleverifyFA_Token({token, secret },$user.user_id)
+            const response = await $app?.handleverifyFA_Token({token, secret },$user.user_id)
             if(response){
                 dispatch("response", response)
             }

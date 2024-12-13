@@ -6,12 +6,7 @@
 
 <div class="css-uqeajf">
     <div class="css-1mo5975">
-        <button on:click={()=> goto(`${$url === "/" ? "" : $url}/?tab=btc`)} class="{tab === "btc" ? "css-ak6yid" : "css-1otg8po"}">BTC</button>
-        <button on:click={()=> goto(`${$url === "/" ? "" : $url}/?tab=eth`)} class="{tab === "eth" ? "css-ak6yid" : "css-1otg8po"}">ETH</button>
-        <button on:click={()=> goto(`${$url === "/" ? "" : $url}/?tab=ltc`)} class="{tab === "ltc" ? "css-ak6yid" : "css-1otg8po"}">LTC</button>
         <button on:click={()=> goto(`${$url === "/" ? "" : $url}/?tab=sol`)} class="{tab === "sol" ? "css-ak6yid" : "css-1otg8po"}">SOL</button>
-        <button on:click={()=> goto(`${$url === "/" ? "" : $url}/?tab=trx`)} class="{tab === "trx" ? "css-ak6yid" : "css-1otg8po"}">TRX</button>
-        <button on:click={()=> goto(`${$url === "/" ? "" : $url}/?tab=usdt`)} class="{tab === "usdt" ? "css-ak6yid" : "css-1otg8po"}">USDT</button>
     </div>
     <div class="css-1xat6c" style="display: none;">
         <button class="css-lui29e">

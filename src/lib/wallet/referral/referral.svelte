@@ -1,8 +1,9 @@
 <script>
      const logo = new URL('../../../lib/images/Cyclix Games Casino - Coin Logo 3D.png', import.meta.url).href
-     import { regsterReferralCode } from "$lib/index";
      import { handleAuthToken } from "$lib/store/routes";
      import { user } from "$lib/store/profile";
+     import { app } from '$lib/store/app';
+
     import { onMount } from "svelte";
     export let referral
 
@@ -10,7 +11,7 @@
     $: isloading = false
     const handleSubmit = (async()=>{
         isloading = true
-      const response =  await regsterReferralCode($handleAuthToken,code)
+      const response =  await $app?.regsterReferralCode($handleAuthToken,code)
       if(response){
         user.set(response)
         isloading = false

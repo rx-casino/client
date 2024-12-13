@@ -1,14 +1,14 @@
 <script>
     import { handleAuthToken} from "$lib/store/routes";
-    import { handleChangeDefaultWallet } from "$lib/index"
     import { coin_list, default_Wallet } from "$lib/store/coins";
+    import { app } from '$lib/store/app';
     import Loader from "$lib/loader.svelte";
     import { onMount } from "svelte";
     let loading = false
     $: totalBal = 0
     const selectDefaultWallet = (async(newItem)=>{
         loading = newItem
-        const {response, isLoading} = await handleChangeDefaultWallet($handleAuthToken, newItem)
+        const {response, isLoading} = await $app?.handleChangeDefaultWallet( newItem)
         if(response){
             coin_list.set(response)
             response.forEach(element => {

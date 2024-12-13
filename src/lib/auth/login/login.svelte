@@ -3,7 +3,8 @@
     import { url } from "$lib/store/routes";
     import { goto } from "$app/navigation";
     import { device } from "$lib/store/profile";
-    import { handleLoginUser } from "../hook"
+    import { browser } from '$app/environment'
+    import { app } from '$lib/store/app';
     import Google from "../google/google.svelte";
 
     let password = ""
@@ -13,18 +14,24 @@
     $: devic = { ...$device, Login_time: new Date(), type :"Email Login"}
     const handleSubmit = (async(event)=>{
         loading = true
-        const response = await handleLoginUser({password, email,  device:devic})
-        if(response){
-            if(response?.type){
-                 goto(`${$url === "/" ? "" : $url}/?tab=auth&modal=fa&oauth=${response?.password}&aouth2=${response?.secrete}&pip=${response?.email}&token=${response?.user_id}`)
-            }
-            else{
-                if(response){
-                    goto($url)
+        const {status} = await await $app?.auth?.login({password, email,  device:devic})
+        if(status === "success"){
+                if(browser){
+                    window.location.href = "/"
                 }
-            }
-            loading = false
-        }
+           }
+        loading = false
+        // if(response){
+        //     if(response?.type){
+        //          goto(`${$url === "/" ? "" : $url}/?tab=auth&modal=fa&oauth=${response?.password}&aouth2=${response?.secrete}&pip=${response?.email}&token=${response?.user_id}`)
+        //     }
+        //     else{
+        //         if(response){
+        //             goto($url)
+        //         }
+        //     }
+        //     loading = false
+        // }
     })
 
     let showPassword = false;

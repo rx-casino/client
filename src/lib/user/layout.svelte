@@ -1,6 +1,5 @@
 <script>
     import { screen} from "$lib/store/screen";
-    import { handleUserProfile } from "$lib/index"
     import Favourite from "./favourite/favourite.svelte";
     import Statistics from "./stat/overview.svelte";
     import Stat from "./stat/statistics.svelte";
@@ -10,6 +9,7 @@
     import Profilepic from "./profilepic.svelte";
     import { onMount } from "svelte";
     import Loader from "$lib/loader.svelte";
+    import { app } from '$lib/store/app';
     export let tab
     $: _user = {}
     $: loading = true
@@ -17,7 +17,7 @@
 
     onMount(async()=>{
     loading = true
-      const res =  await handleUserProfile(tab[2])
+      const res =  await $app?.handleUserProfile(tab[2])
       loading = false
       if(res){
         _user = res?.user

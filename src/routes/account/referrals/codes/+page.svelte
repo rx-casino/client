@@ -1,9 +1,9 @@
 <script>
-    import { createRefCode , referralCode} from "$lib/index";
     import { handleAuthToken } from "$lib/store/routes";
     import { clientUrl } from "$lib/backendUrl";
     import { onMount } from "svelte";
     import Loader from "$lib/loader.svelte";
+    import { app } from '$lib/store/app';
 
     $: isloading = false
     let code = ""
@@ -12,7 +12,7 @@
 
     const handleSubmit = (async()=>{
         isloading = true
-       const {response, load} = await createRefCode($handleAuthToken, code)
+       const {response, load} = await $app?.createRefCode($handleAuthToken, code)
        if(response){
             referralData = response
        }
@@ -21,7 +21,7 @@
     })
 
     onMount(async()=>{
-        referralData = await referralCode($handleAuthToken)
+        referralData = await $app?.referralCode($handleAuthToken)
     })
 
 $: isCopied = false

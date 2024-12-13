@@ -1,6 +1,7 @@
 import Decimal from "decimal.js";
 import EventEmitter from "$lib/logics/EventEmitter";
 import { fetchWallet } from "$lib/index";
+import { app } from '$lib/store/app';
 import { default_Wallet, sol, fun_coupon, } from "$lib/store/coins";
 import {
   currencyRates, preferredCurrency

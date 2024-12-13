@@ -21,12 +21,12 @@
    import Auth from "$lib/auth/layout.svelte";
    import Verification from "$lib/auth/verify/verification.svelte";
    import Wallet from "$lib/wallet/layout.svelte";
-   import { fetchVistorsDevice } from "$lib/index";
    import { handleSocketConnection } from "$lib/socket/index";
    import SearchGames from "$lib/searchGames/SearchGames.svelte";
    import User from "$lib/user/layout.svelte"
    import LiveStats from "$lib/games/crash/dialogs/LiveStats.svelte";
-   import { navigating } from '$app/stores';
+   import { app } from '$lib/store/app';
+   import { loadapp } from '../lib/store/app';
    export let data 
 
    $: isPassword = data?.password ? false : true
@@ -113,7 +113,7 @@
 
 
    onMount(async()=>{
-     const response = await fetchVistorsDevice()
+     const response = await $app?.fetchVistorsDevice()
      device.set(response)
    })
 
@@ -123,7 +123,7 @@
 </script>
 
 <Toaster position="bottom-left" expand={true} richColors  />
-{#if $screen && $device}
+{#if !$loadapp}
    <div id="root" >
       <Navbar sideHasExpand={sideHasExpand} chat={chat} menu={menu} on:home={handleHomeSelection} on:return={()=> sideHasExpand = 248} on:chat={handleChatSection} on:menu={handleMenuSection}/>
          {#if $screen < 750}

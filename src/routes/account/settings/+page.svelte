@@ -1,13 +1,13 @@
 <script>
     import { user } from "$lib/store/profile";
-    import { handleAuthToken} from "$lib/store/routes";
+
     import { onMount } from "svelte";
-    import { handleFetchLoginType , handleDeleteAuthentication} from "$lib/index";
     import GoogleFA from "./_2fa.svelte";
     import Tip from "./components/tip.svelte";
     import LoginHistory from "./components/loginHistory.svelte";
     import ChangeEmail from "./components/changeEmail.svelte";
     import ChangePassword from "./components/changePassword.svelte";
+    import { app } from '$lib/store/app';
     $: respose = ""
     $: isGoogleFA = false
     let disableCode = ""
@@ -18,12 +18,12 @@
     })
 
     onMount(async()=>{
-        respose = await handleFetchLoginType($handleAuthToken)
+        respose = await $app?.handleFetchLoginType()
     })
     let disableLoad = false
     const Disable2faAuthentication = (async()=>{
         disableLoad = true
-        const response = await handleDeleteAuthentication(disableCode,$user?.email)
+        const response = await $app?.handleDeleteAuthentication(disableCode,$user?.email)
         if(response){
             respose = response
             disableLoad = false

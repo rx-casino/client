@@ -1,9 +1,9 @@
 <script>
-    import { handlePasswordChange, handlePasswordValidation} from "$lib/auth/hook";
     import Loader from "$lib/loader.svelte";
     import { createEventDispatcher } from "svelte";
     import { handleResposeMessages } from "$lib/store/activities";
     import { handleAuthToken } from "$lib/store/routes";
+    import { app } from '$lib/store/app';
     const dispatch = createEventDispatcher();
     export let respose
 
@@ -16,7 +16,7 @@
 
     const handleChangePasswordEl = (async()=>{
         passwordLoad = true
-        const data = await handlePasswordChange($handleAuthToken, {_2faCode, newPassword})
+        const data = await $app?.handlePasswordChange($handleAuthToken, {_2faCode, newPassword})
         if(data.response){
             showWarning = false
             finale = false
@@ -49,7 +49,7 @@
           return 
         }
         else{
-            const {response, isLoading} = await handlePasswordValidation($handleAuthToken, {oldPassword, newPassword})
+            const {response, isLoading} = await $app?.handlePasswordValidation($handleAuthToken, {oldPassword, newPassword})
             if(response){
                 showWarning = true
             }
